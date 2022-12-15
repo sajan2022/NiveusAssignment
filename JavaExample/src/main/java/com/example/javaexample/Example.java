@@ -11,4 +11,8 @@ public class Example {
 		return "HelloWorld";
 	}
 	
+	@GetMapping("/detail")
+	public String getDetails() {
+		return "Welcome to java";
+	}
 }
