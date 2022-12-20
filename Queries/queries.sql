@@ -1,7 +1,7 @@
 
 INSERT INTO employee (emp_name,department) VALUES('sajan','IT');
 
-UPDATE employee set name = 'sajan b' WHERE emp_id = 1;
+UPDATE employee set emp_name = 'sajan b' WHERE emp_id = 1;
 
 SELECT * FROM  employee;
 
