@@ -3,6 +3,8 @@ package com.example.javaexample.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.javaexample.dto.EmployeeDTO;
 import com.example.javaexample.entity.Employee;
 import com.example.javaexample.service.CrudService;
 
@@ -23,60 +26,60 @@ public class CrudController {
 	private CrudService crudService;
 	
 	@PostMapping("add_employee")
-	public String addEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody Employee employee) {
 		try {
 			
-			return crudService.addEmployee(employee);
+			return new ResponseEntity<>(crudService.addEmployee(employee), HttpStatus.CREATED);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | ADD EMPLOYEE  CONTROLLER | "+ e.getMessage());
 			
-			return "Controller Failed";
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PutMapping("update_employee")
-	public String updateEmployee(@RequestBody Employee employee) {
+	public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody Employee employee) {
 		try {
 			
-			return crudService.updateEmployee(employee);
+			return new ResponseEntity<>(crudService.updateEmployee(employee),HttpStatus.OK);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | UPDATE EMPLOYEE CONTROLLER | "+ e.getMessage());
-			return "Controller Failed";
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@DeleteMapping("delete_employee")
-	public String deleteEmployee(@RequestParam("empId") Long id) {
+	public ResponseEntity<EmployeeDTO>  deleteEmployee(@RequestParam("empId") Long id) {
 		try {
 			
-			return crudService.deleteEmployee(id);
+			return new ResponseEntity<>(crudService.deleteEmployee(id),HttpStatus.OK);
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | DELETE EMPLOYEE CONTROLLER | "+ e.getMessage());
 			
-			return "Controller Failed";
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@GetMapping("view_employee")
-	public List<Employee> viewEmployee(){
+	public ResponseEntity<List<Employee>> viewEmployee(){
 		
 		try {
 			
-			return crudService.viewEmployee();
+			return new ResponseEntity<>(crudService.viewEmployee(),HttpStatus.OK);
 			
 		} catch (Exception e) {
 			
 			System.out.println(" EXCEPTION FOUND | VIEW EMPLOYEE CONTROLLER | "+ e.getMessage());
-			return null;
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 	}
