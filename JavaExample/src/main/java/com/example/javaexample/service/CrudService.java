@@ -6,13 +6,14 @@ import org.springframework.stereotype.Service;
 
 import com.example.javaexample.dto.EmployeeDTO;
 import com.example.javaexample.entity.Employee;
+import com.example.javaexample.util.ServiceResponse;
 
 @Service
 public interface CrudService {
 	
-	public EmployeeDTO addEmployee(Employee employee);
-	public EmployeeDTO updateEmployee(Employee employee);
-	public EmployeeDTO deleteEmployee(Long id);
-	public List<Employee> viewEmployee();
+	public ServiceResponse<EmployeeDTO> addEmployee(EmployeeDTO employeeDTO);
+	public ServiceResponse<EmployeeDTO> updateEmployee(EmployeeDTO employeeDTO);
+	public ServiceResponse<EmployeeDTO> deleteEmployee(Long id);
+	public ServiceResponse<List<EmployeeDTO>> viewEmployee();
 	
 }

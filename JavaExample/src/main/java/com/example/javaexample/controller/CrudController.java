@@ -15,8 +15,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.javaexample.dto.EmployeeDTO;
-import com.example.javaexample.entity.Employee;
 import com.example.javaexample.service.CrudService;
+import com.example.javaexample.util.Response;
+import com.example.javaexample.util.ServiceResponse;
 
 @RestController
 @RequestMapping(path = "/api/employee/")
@@ -25,61 +26,113 @@ public class CrudController {
 	@Autowired
 	private CrudService crudService;
 	
-	@PostMapping("add_employee")
-	public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody Employee employee) {
+	@PostMapping("addEmployee")
+	public ResponseEntity<Response> addEmployee(@RequestBody EmployeeDTO employeeDto) {
 		try {
+			Response response;
+			ServiceResponse<EmployeeDTO> serviceResponse = crudService.addEmployee(employeeDto);
 			
-			return new ResponseEntity<>(crudService.addEmployee(employee), HttpStatus.CREATED);
+			if(serviceResponse.getStatus() == HttpStatus.CREATED) {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), serviceResponse.getT());
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}else {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), null);
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | ADD EMPLOYEE  CONTROLLER | "+ e.getMessage());
 			
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@PutMapping("update_employee")
-	public ResponseEntity<EmployeeDTO> updateEmployee(@RequestBody Employee employee) {
+	@PutMapping("updateEmployee")
+	public ResponseEntity<Response> updateEmployee(@RequestBody EmployeeDTO employeeDto) {
 		try {
 			
-			return new ResponseEntity<>(crudService.updateEmployee(employee),HttpStatus.OK);
+			Response response;
+			ServiceResponse<EmployeeDTO> serviceResponse = crudService.updateEmployee(employeeDto);
+			
+			if(serviceResponse.getStatus() == HttpStatus.OK) {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), serviceResponse.getT());
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}else {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), null);
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}
+			
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | UPDATE EMPLOYEE CONTROLLER | "+ e.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@DeleteMapping("delete_employee")
-	public ResponseEntity<EmployeeDTO>  deleteEmployee(@RequestParam("empId") Long id) {
+	@DeleteMapping("deleteEmployee")
+	public ResponseEntity<Response>  deleteEmployee(@RequestParam("empId") Long id) {
 		try {
 			
-			return new ResponseEntity<>(crudService.deleteEmployee(id),HttpStatus.OK);
+			Response response;
+			ServiceResponse<EmployeeDTO> serviceResponse = crudService.deleteEmployee(id);
+			
+			if(serviceResponse.getStatus() == HttpStatus.OK) {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), serviceResponse.getT());
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}else {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), null);
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}
 			
 		} catch (Exception e) {
 			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | DELETE EMPLOYEE CONTROLLER | "+ e.getMessage());
 			
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@GetMapping("view_employee")
-	public ResponseEntity<List<Employee>> viewEmployee(){
+	@GetMapping("viewEmployee")
+	public ResponseEntity<Response> viewEmployee(){
 		
 		try {
 			
-			return new ResponseEntity<>(crudService.viewEmployee(),HttpStatus.OK);
+			Response response;
+			ServiceResponse<List<EmployeeDTO>> serviceResponse = crudService.viewEmployee();
+			
+			if(serviceResponse.getStatus() == HttpStatus.OK) {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), serviceResponse.getT());
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}else {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), null);
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}
 			
 		} catch (Exception e) {
 			
 			System.out.println(" EXCEPTION FOUND | VIEW EMPLOYEE CONTROLLER | "+ e.getMessage());
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
 			
 		}
 	}
