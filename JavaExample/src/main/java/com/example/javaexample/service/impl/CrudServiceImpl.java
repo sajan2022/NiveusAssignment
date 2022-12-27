@@ -51,6 +51,7 @@ public class CrudServiceImpl implements CrudService{
 		try {
 			
 			Employee employee = new Employee();
+			employee.setId(employeeDto.getId());
 			employee.setEmpName(employeeDto.getEmpName());
 			employee.setDepartment(employeeDto.getDepartment());
 			
