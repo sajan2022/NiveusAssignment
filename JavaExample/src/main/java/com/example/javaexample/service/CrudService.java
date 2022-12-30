@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.javaexample.dto.EmployeeDTO;
-import com.example.javaexample.entity.Employee;
 import com.example.javaexample.util.ServiceResponse;
 
 @Service

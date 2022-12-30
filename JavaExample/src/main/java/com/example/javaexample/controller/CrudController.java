@@ -23,6 +23,7 @@ import com.example.javaexample.util.ServiceResponse;
 @RequestMapping(path = "/api/employee/")
 public class CrudController {
 	
+	
 	@Autowired
 	private CrudService crudService;
 	
@@ -45,7 +46,6 @@ public class CrudController {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | ADD EMPLOYEE  CONTROLLER | "+ e.getMessage());
 			
@@ -74,7 +74,6 @@ public class CrudController {
 			
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | UPDATE EMPLOYEE CONTROLLER | "+ e.getMessage());
 			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
@@ -101,7 +100,6 @@ public class CrudController {
 			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
 			
 			System.out.println(" EXCEPTION FOUND | DELETE EMPLOYEE CONTROLLER | "+ e.getMessage());
 			
