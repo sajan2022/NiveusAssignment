@@ -135,4 +135,32 @@ public class CrudController {
 		}
 	}
 	
+	
+	@GetMapping("searchEmployee")
+	public ResponseEntity<Response> viewEmployee(@RequestParam("type") String type, @RequestParam("value") String value){
+		
+		try {
+			
+			Response response;
+			ServiceResponse<List<EmployeeDTO>> serviceResponse = crudService.searchEmployee(type,value);
+			
+			if(serviceResponse.getStatus() == HttpStatus.OK) {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), serviceResponse.getT());
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}else {
+				
+				response = new Response(serviceResponse.getStatus(), serviceResponse.getMessage(), null);
+				return new ResponseEntity<>(response, serviceResponse.getStatus());
+				
+			}
+			
+		} catch (Exception e) {
+			
+			System.out.println(" EXCEPTION FOUND | VIEW EMPLOYEE CONTROLLER | "+ e.getMessage());
+			return new ResponseEntity<>(new Response(HttpStatus.INTERNAL_SERVER_ERROR, "Please Contact customer support", null),HttpStatus.INTERNAL_SERVER_ERROR);
+			
+		}
+	}
 }

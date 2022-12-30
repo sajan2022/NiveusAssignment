@@ -15,4 +15,6 @@ public interface CrudService {
 	public ServiceResponse<EmployeeDTO> deleteEmployee(Long id);
 	public ServiceResponse<List<EmployeeDTO>> viewEmployee();
 	
+	public ServiceResponse<List<EmployeeDTO>> searchEmployee(String type,String value);
+	
 }

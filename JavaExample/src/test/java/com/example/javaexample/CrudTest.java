@@ -34,10 +34,12 @@ class CrudTest {
 		EmployeeDTO employeeDTO = new EmployeeDTO();
 		employeeDTO.setEmpName("Kiran");
 		employeeDTO.setDepartment("IT");
+		employeeDTO.setYearOfJoin("2022");
 		
 		Employee employeeInfo = new Employee();
 		employeeInfo.setEmpName(employeeDTO.getEmpName());
 		employeeInfo.setDepartment(employeeDTO.getDepartment());
+		employeeInfo.setYearOfJoin(employeeDTO.getYearOfJoin());
 		
 		employeeInfo = crudRepository.save(employeeInfo);
 		
