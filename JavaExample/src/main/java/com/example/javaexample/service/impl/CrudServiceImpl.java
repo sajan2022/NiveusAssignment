@@ -111,7 +111,7 @@ public class CrudServiceImpl implements CrudService{
 		try {
 			
 			List<EmployeeDTO> employeeList = new ArrayList<>();
-			crudRepository.findAll().forEach((employeeInfo)->{
+			crudRepository.findAll().forEach( employeeInfo -> {
 				EmployeeDTO employeeDTO = new EmployeeDTO();
 				employeeDTO.setId(employeeInfo.getId());
 				employeeDTO.setEmpName(employeeInfo.getEmpName());
@@ -154,7 +154,7 @@ public class CrudServiceImpl implements CrudService{
 			List<EmployeeDTO> employeeList = new ArrayList<>();
 			if(type.equalsIgnoreCase("NAME")) {
 				
-				crudRepository.findByName(value).forEach((employeeInfo)->{
+				crudRepository.findByName(value).forEach( employeeInfo -> {
 					EmployeeDTO employeeDTO = new EmployeeDTO();
 					employeeDTO.setId(employeeInfo.getId());
 					employeeDTO.setEmpName(employeeInfo.getEmpName());
@@ -166,7 +166,7 @@ public class CrudServiceImpl implements CrudService{
 				
 			}else if(type.equalsIgnoreCase("DEPARTMENT")){
 				
-				crudRepository.findByDepartment(value).forEach((employeeInfo)->{
+				crudRepository.findByDepartment(value).forEach( employeeInfo -> {
 					EmployeeDTO employeeDTO = new EmployeeDTO();
 					employeeDTO.setId(employeeInfo.getId());
 					employeeDTO.setEmpName(employeeInfo.getEmpName());
@@ -176,8 +176,6 @@ public class CrudServiceImpl implements CrudService{
 				});
 				
 			}
-			
-			
 			
 			return employeeList;
 			

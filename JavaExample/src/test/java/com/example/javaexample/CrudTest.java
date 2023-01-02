@@ -13,6 +13,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.example.javaexample.dto.EmployeeDTO;
@@ -20,8 +21,7 @@ import com.example.javaexample.entity.Employee;
 import com.example.javaexample.repository.CrudRepository;
 
 @ExtendWith(SpringExtension.class)
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@SpringBootTest
 class CrudTest {
 	
 	@Autowired
@@ -44,7 +44,7 @@ class CrudTest {
 		employeeInfo = crudRepository.save(employeeInfo);
 		
 		assertNotNull(employeeInfo);
-		org.assertj.core.api.Assertions.assertThat(employeeInfo.getId()).isGreaterThan(0);
+		Assertions.assertThat(employeeInfo.getId()).isGreaterThan(0);
 
 	}
 	
@@ -70,9 +70,7 @@ class CrudTest {
 	@Order(3)
 	void deleteEmployeeTest() {
 		
-		
-		Employee employeeInfo = crudRepository.findById(8L).orElse(null);
-		crudRepository.delete(employeeInfo);
+		crudRepository.deleteById(8L);
 		
 		Employee deletedEmployee = crudRepository.findById(8L).orElse(null);
 		assertThat(deletedEmployee).isNull();
